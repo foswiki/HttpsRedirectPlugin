@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" date="1219703787" format="1.1"  version="1.2"}%
+%META:TOPICINFO{author="StephaneLenclud" date="1240882180" format="1.1" reprev="1.2" version="1.2"}%
 ---+!! !HttpsRedirectPlugin
 <!--
 One line description, required for extensions repository catalog.
@@ -11,7 +11,7 @@ One line description, required for extensions repository catalog.
 ---++ Usage
 
 The HTTPS redirect plug-in is designed to help you run a web site where guest users can access pages through HTTP and authenticated users will be forced to use HTTPS.
-This plug-in do not expose any TWiki =%TAG%=. Simply activate the plug-in from =configure= to take advantage of its functionality.
+Simply activate the plug-in from =configure= to take advantage of its functionality.
 Once enabled it will force authenticated users to use HTTPS by redirecting them to HTTPS URL if needed. Guests will be redirected to HTTPS only when accessing the login screen.
 
 ---++ Installation Instructions
@@ -23,11 +23,12 @@ Once enabled it will force authenticated users to use HTTPS by redirecting them 
 Many thanks to the following sponsors for supporting this work:
    * http://slion.net
 
-|  Plugin Author(s): | |
-|  Copyright: | &copy; |
+|  Plugin Author(s): | Foswiki:Main.StephaneLenclud |
+|  Copyright: | &copy; 2008-2009 StéphaneLenclud |
 |  License: | [[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]] |
 |  Plugin Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  28 Apr 2009 | v1.0 First actually working version for Foswiki  |
 |  Dependencies: | %$DEPENDENCIES% |
 |  Plugin Home: | http://twiki.org/cgi-bin/view/Plugins/HttpsRedirectPlugin |
 |  Feedback: | http://twiki.org/cgi-bin/view/Plugins/HttpsRedirectPluginDev |

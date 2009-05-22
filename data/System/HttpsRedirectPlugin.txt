@@ -30,9 +30,8 @@ Many thanks to the following sponsors for supporting this work:
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
 |  28 Apr 2009 | v1.0 First actually working version for Foswiki  |
 |  Dependencies: | %$DEPENDENCIES% |
-|  Plugin Home: | http://twiki.org/cgi-bin/view/Plugins/HttpsRedirectPlugin |
-|  Feedback: | http://twiki.org/cgi-bin/view/Plugins/HttpsRedirectPluginDev |
-|  Appraisal: | http://twiki.org/cgi-bin/view/Plugins/HttpsRedirectPluginAppraisal |
+|  Plugin Home: | http://foswiki.org/Extensions/HttpsRedirectPlugin |
+|  Support: | http://foswiki.org/Development/HttpsRedirectPlugin |
 
 __Related Topics:__ [[%SYSTEMWEB%.Plugins][Plugins]], %SYSTEMWEB%.DeveloperDocumentationCategory, %SYSTEMWEB%.AdminDocumentationCategory, %SYSTEMWEB%.DefaultPreferences, %USERSWEB%.SitePreferences
 

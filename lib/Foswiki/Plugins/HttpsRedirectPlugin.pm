@@ -46,14 +46,13 @@ the text had been included from another topic.
 
 =cut
 
-
 package Foswiki::Plugins::HttpsRedirectPlugin;
 
 # Always use strict to enforce variable scoping
 use strict;
 
-require Foswiki::Func;    # The plugins API
-require Foswiki::Plugins; # For the API version
+require Foswiki::Func;       # The plugins API
+require Foswiki::Plugins;    # For the API version
 
 # $VERSION is referred to by TWiki, and is the only global variable that
 # *must* exist in this package.
@@ -85,7 +84,7 @@ our $NO_PREFS_IN_TOPIC = 1;
 # Name of this Plugin, only used in this module
 our $pluginName = 'HttpsRedirectPlugin';
 
-our $debug=0;
+our $debug = 0;
 
 =pod
 
@@ -119,13 +118,13 @@ FOOBARSOMETHING. This avoids namespace issues.
 
 =cut
 
-
 sub initPlugin {
-    my( $topic, $web, $user, $installWeb ) = @_;
+    my ( $topic, $web, $user, $installWeb ) = @_;
 
     # check for Plugins.pm versions
-    if( $Foswiki::Plugins::VERSION < 1.026 ) {
-        Foswiki::Func::writeWarning( "Version mismatch between $pluginName and Plugins.pm" );
+    if ( $Foswiki::Plugins::VERSION < 1.026 ) {
+        Foswiki::Func::writeWarning(
+            "Version mismatch between $pluginName and Plugins.pm");
         return 0;
     }
 
@@ -139,71 +138,70 @@ sub initPlugin {
     # configuration to the =configure= interface.
     $debug = $Foswiki::cfg{Plugins}{HttpsRedirectPlugin}{Debug} || 0;
 
+    if (Foswiki::Func::isGuest) {
 
+        #If we are guest, force HTTPS on login
+        if ( Foswiki::Func::getContext()
+            ->{'login'} )    #If we are on the login script
+        {
 
-    if (Foswiki::Func::isGuest) 
-    	{
-		#If we are guest, force HTTPS on login
-		if (Foswiki::Func::getContext()->{'login'}) #If we are on the login script
-			{							
-			#Build up our URL			
-			my $query=&Foswiki::Func::getCgiQuery();	
-			my $url=$query->url() . $query->path_info();
-			if ($query->query_string())
-				{
-				$url.= '?' . $query->query_string();	
-				}
+            #Build up our URL
+            my $query = &Foswiki::Func::getCgiQuery();
+            my $url   = $query->url() . $query->path_info();
+            if ( $query->query_string() ) {
+                $url .= '?' . $query->query_string();
+            }
 
-				
-			unless ($url=~/^https/) #Unless we are already using HTTPS
-				{
-				#Redirect to HTTPS URL and quite				
-				$url=~s/^http/https/;				
-				Foswiki::Func::writeDebug("HTTPS redirect to: $url" ) if ($debug);
-				Foswiki::Func::redirectCgiQuery($query, $url);							
-				#$Foswiki::Plugins::SESSION->finish();				
-				#exit(0);
-				}
-			}	    	    
+            unless ( $url =~ /^https/ )    #Unless we are already using HTTPS
+            {
 
-    	}
-	else
-		{
-		#If the user is no guest always force HTTPS
-	
-		#Get our URL			
-		my $query=&Foswiki::Func::getCgiQuery();	
-		my $url=$query->url() . $query->path_info();
-		if ($query->query_string())
-			{
-			$url.= '?' . $query->query_string();	
-			}
+                #Redirect to HTTPS URL and quite
+                $url =~ s/^http/https/;
+                Foswiki::Func::writeDebug("HTTPS redirect to: $url")
+                  if ($debug);
+                Foswiki::Func::redirectCgiQuery( $query, $url );
 
-				
-		unless ($url=~/^https/) #Unless we are already using HTTPS
-			{
-			#Redirect to HTTPS URL and quite				
-			$url=~s/^http/https/;				
-			Foswiki::Func::writeDebug("HTTPS redirect to: $url" ) if ($debug);
-			Foswiki::Func::redirectCgiQuery($query, $url);							
-			#$Foswiki::Plugins::SESSION->finish();				
-			#exit(0);
-			}	    	    
-		}
-    
-    
-    
+                #$Foswiki::Plugins::SESSION->finish();
+                #exit(0);
+            }
+        }
+
+    }
+    else {
+
+        #If the user is no guest always force HTTPS
+
+        #Get our URL
+        my $query = &Foswiki::Func::getCgiQuery();
+        my $url   = $query->url() . $query->path_info();
+        if ( $query->query_string() ) {
+            $url .= '?' . $query->query_string();
+        }
+
+        unless ( $url =~ /^https/ )    #Unless we are already using HTTPS
+        {
+
+            #Redirect to HTTPS URL and quite
+            $url =~ s/^http/https/;
+            Foswiki::Func::writeDebug("HTTPS redirect to: $url") if ($debug);
+            Foswiki::Func::redirectCgiQuery( $query, $url );
+
+            #$Foswiki::Plugins::SESSION->finish();
+            #exit(0);
+        }
+    }
+
     # register the _EXAMPLETAG function to handle %EXAMPLETAG{...}%
     # This will be called whenever %EXAMPLETAG% or %EXAMPLETAG{...}% is
     # seen in the topic text.
     #Foswiki::Func::registerTagHandler( 'EXAMPLETAG', \&_EXAMPLETAG );
 
-    # Allow a sub to be called from the REST interface 
+    # Allow a sub to be called from the REST interface
     # using the provided alias
     #Foswiki::Func::registerRESTHandler('example', \&restExample);
 
     # Plugin correctly initialized
     return 1;
 }
-
+
 1;

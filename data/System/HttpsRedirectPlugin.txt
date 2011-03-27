@@ -1,4 +1,5 @@
 %META:TOPICINFO{author="StephaneLenclud" date="1240882180" format="1.1" reprev="1.2" version="1.2"}%
+%META:TOPICPARENT{name="Plugins"}%
 ---+!! !HttpsRedirectPlugin
 <!--
 One line description, required for extensions repository catalog.
@@ -28,10 +29,13 @@ Many thanks to the following sponsors for supporting this work:
 |  License: | [[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]] |
 |  Plugin Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  28 Mar 2011 | v1.1 Foswikitask:10551 - fixed a problem where foswiki scripts would produce no output if run from CLI |
 |  28 Apr 2009 | v1.0 First actually working version for Foswiki  |
 |  Dependencies: | %$DEPENDENCIES% |
 |  Plugin Home: | http://foswiki.org/Extensions/HttpsRedirectPlugin |
-|  Support: | http://foswiki.org/Development/HttpsRedirectPlugin |
+|  Development: | http://foswiki.org/Development/HttpsRedirectPlugin |
+|  Support: | http://foswiki.org/Support/HttpsRedirectPlugin |
+|  Tasks: | http://foswiki.org/Tasks/HttpsRedirectPlugin |
 
 __Related Topics:__ [[%SYSTEMWEB%.Plugins][Plugins]], %SYSTEMWEB%.DeveloperDocumentationCategory, %SYSTEMWEB%.AdminDocumentationCategory, %SYSTEMWEB%.DefaultPreferences, %USERSWEB%.SitePreferences
 

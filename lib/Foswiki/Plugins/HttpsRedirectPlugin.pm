@@ -146,7 +146,7 @@ sub initPlugin {
         {
 
             #Build up our URL
-            my $query = &Foswiki::Func::getCgiQuery();
+            my $query = Foswiki::Func::getCgiQuery();
             my $url   = $query->url() . $query->path_info();
             if ( $query->query_string() ) {
                 $url .= '?' . $query->query_string();
@@ -172,13 +172,15 @@ sub initPlugin {
         #If the user is no guest always force HTTPS
 
         #Get our URL
-        my $query = &Foswiki::Func::getCgiQuery();
+        my $query = Foswiki::Func::getCgiQuery();
         my $url   = $query->url() . $query->path_info();
         if ( $query->query_string() ) {
             $url .= '?' . $query->query_string();
         }
 
-        unless ( $url =~ /^https/ )    #Unless we are already using HTTPS
+        #Unless we are already using HTTPS, or running from CLI
+        unless ( $url =~ /^https/
+            or Foswiki::Func::getContext()->{'command_line'} )
         {
 
             #Redirect to HTTPS URL and quite

@@ -15,9 +15,9 @@
 
 ---+ package Foswiki::Plugins::HttpsRedirectPlugin
 
-To interact with TWiki use ONLY the official API functions
+To interact with Foswiki use ONLY the official API functions
 in the Foswiki::Func module. Do not reference any functions or
-variables elsewhere in TWiki, as these are subject to change
+variables elsewhere in Foswiki, as these are subject to change
 without prior warning, and your plugin may suddenly stop
 working.
 
@@ -28,7 +28,7 @@ delete the whole of handlers you don't use before you release your
 plugin.
 
 __NOTE:__ When developing a plugin it is important to remember that
-TWiki is tolerant of plugins that do not compile. In this case,
+Foswiki is tolerant of plugins that do not compile. In this case,
 the failure will be silent but the plugin will not be available.
 See [[%SYSTEMWEB%.Plugins#FAILEDPLUGINS]] for error messages.
 
@@ -36,7 +36,7 @@ __NOTE:__ Defining deprecated handlers will cause the handlers to be
 listed in [[%SYSTEMWEB%.Plugins#FAILEDPLUGINS]]. See
 [[%SYSTEMWEB%.Plugins#Handlig_deprecated_functions]]
 for information on regarding deprecated handlers that are defined for
-compatibility with older TWiki versions.
+compatibility with older Foswiki versions.
 
 __NOTE:__ When writing handlers, keep in mind that these may be invoked
 on included topics. For example, if a plugin generates links to the current
@@ -54,31 +54,15 @@ use strict;
 require Foswiki::Func;       # The plugins API
 require Foswiki::Plugins;    # For the API version
 
-# $VERSION is referred to by TWiki, and is the only global variable that
-# *must* exist in this package.
-#use vars qw( $VERSION $RELEASE $SHORTDESCRIPTION $debug $pluginName $NO_PREFS_IN_TOPIC );
-
-# This should always be $Rev$ so that TWiki can determine the checked-in
-# status of the plugin. It is used by the build automation tools, so
-# you should leave it alone.
-our $VERSION = '$Rev$ (2011-03-28)';
-
-# This is a free-form string you can use to "name" your own plugin version.
-# It is *not* used by the build automation tools, but is reported as part
-# of the version number in PLUGINDESCRIPTIONS.
-our $RELEASE = '1.1';
+our $VERSION = '1.2';
+our $RELEASE = '19 Mar 2016';
 
 # Short description of this plugin
 # One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
 our $SHORTDESCRIPTION = 'Redirect authenticated users to HTTPS url.';
 
 # You must set $NO_PREFS_IN_TOPIC to 0 if you want your plugin to use preferences
-# stored in the plugin topic. This default is required for compatibility with
-# older plugins, but imposes a significant performance penalty, and
-# is not recommended. Instead, use $Foswiki::cfg entries set in LocalSite.cfg, or
-# if you want the users to be able to change settings, then use standard TWiki
-# preferences that can be defined in your %USERSWEB%.SitePreferences and overridden
-# at the web and topic level.
+# stored in the plugin topic. 
 our $NO_PREFS_IN_TOPIC = 1;
 
 # Name of this Plugin, only used in this module
@@ -93,28 +77,6 @@ our $debug = 0;
    * =$web= - the name of the web in the current CGI query
    * =$user= - the login name of the user
    * =$installWeb= - the name of the web the plugin is installed in
-
-REQUIRED
-
-Called to initialise the plugin. If everything is OK, should return
-a non-zero value. On non-fatal failure, should write a message
-using Foswiki::Func::writeWarning and return 0. In this case
-%FAILEDPLUGINS% will indicate which plugins failed.
-
-In the case of a catastrophic failure that will prevent the whole
-installation from working safely, this handler may use 'die', which
-will be trapped and reported in the browser.
-
-You may also call =Foswiki::Func::registerTagHandler= here to register
-a function to handle variables that have standard TWiki syntax - for example,
-=%MYTAG{"my param" myarg="My Arg"}%. You can also override internal
-TWiki variable handling functions this way, though this practice is unsupported
-and highly dangerous!
-
-__Note:__ Please align variables names with the Plugin name, e.g. if 
-your Plugin is called FooBarPlugin, name variables FOOBAR and/or 
-FOOBARSOMETHING. This avoids namespace issues.
-
 
 =cut
 
@@ -193,14 +155,6 @@ sub initPlugin {
         }
     }
 
-    # register the _EXAMPLETAG function to handle %EXAMPLETAG{...}%
-    # This will be called whenever %EXAMPLETAG% or %EXAMPLETAG{...}% is
-    # seen in the topic text.
-    #Foswiki::Func::registerTagHandler( 'EXAMPLETAG', \&_EXAMPLETAG );
-
-    # Allow a sub to be called from the REST interface
-    # using the provided alias
-    #Foswiki::Func::registerRESTHandler('example', \&restExample);
 
     # Plugin correctly initialized
     return 1;

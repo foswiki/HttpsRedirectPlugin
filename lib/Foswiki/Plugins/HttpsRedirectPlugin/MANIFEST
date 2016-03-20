@@ -1,4 +1,3 @@
-# Release manifest for HttpsRedirectPlugin
-data/System/HttpsRedirectPlugin.txt 0644 Documentation
-lib/Foswiki/Plugins/HttpsRedirectPlugin.pm 0644 Perl module
-
+data/System/HttpsRedirectPlugin.txt 0644
+lib/Foswiki/Plugins/HttpsRedirectPlugin.pm 0644
+lib/Foswiki/Plugins/HttpsRedirectPlugin/Config.spec 0664

@@ -1,3 +1,4 @@
 data/System/HttpsRedirectPlugin.txt 0644
 lib/Foswiki/Plugins/HttpsRedirectPlugin.pm 0644
 lib/Foswiki/Plugins/HttpsRedirectPlugin/Config.spec 0664
+lib/Foswiki/Plugins/HttpsRedirectPlugin/CoreHooks.pm 0664

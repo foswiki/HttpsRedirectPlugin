@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" date="1458439803" format="1.1"  version="1.2"}%
+%META:TOPICINFO{author="ProjectContributor" date="1490669264" format="1.1"  version="1.2"}%
 %META:TOPICPARENT{name="Plugins"}%
 ---+!! !HttpsRedirectPlugin
 <!--
@@ -15,6 +15,16 @@ The HTTPS redirect plug-in is designed to help you run a web site where guest us
 Simply activate the plug-in from =configure= to take advantage of its functionality.
 Once enabled it will force authenticated users to use HTTPS by redirecting them to HTTPS URL if needed. Guests will be redirected to HTTPS only when accessing the login screen.
 
+Redirect happens on the following conditions:
+   * Request for the login script.
+   * Request for any script listed in ={AuthScripts}=
+   * Any request that triggers the LoginManager::TemplateLogin::forceAuthentication() event.
+
+Note tht as of this release, only the !TemplateLogin method is supported for
+forceAuthentication based redirects.
+
+Be sure to set the https:// URL in ={PermittedRedirectHostUrls}=.
+
 ---++ Installation Instructions
 
 %$INSTALL_INSTRUCTIONS%
@@ -24,11 +34,12 @@ Once enabled it will force authenticated users to use HTTPS by redirecting them 
 Many thanks to the following sponsors for supporting this work:
    * http://slion.net
 
-|  Plugin Author(s): | Foswiki:Main.StephaneLenclud |
-|  Copyright: | &copy; 2008-2009 St&eacute;phaneLenclud, 2011-2016 Foswiki Contributors |
+|  Plugin Author(s): | Foswiki:Main.StephaneLenclud Foswiki:Main.GeorgeClark |
+|  Copyright: | &copy; 2008-2009 St&eacute;phaneLenclud, 2011-2017 Foswiki Contributors |
 |  License: | [[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]] |
 |  Plugin Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  26 Mar 2017 | v1.3 Foswikitask:Item11621 - Redirect auth scripts and forceAuthentication events. |
 |  19 mar 2016 | v1.2 Foswikitask:Item14030 - Use new version strings, remove non-utf8 characters from topic. Other minor cleanup. |
 |  28 Mar 2011 | v1.1 Foswikitask:Item10551 - fixed a problem where foswiki scripts would produce no output if run from CLI |
 |  28 Apr 2009 | v1.0 First actually working version for Foswiki  |
